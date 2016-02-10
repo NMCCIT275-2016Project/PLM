@@ -8,18 +8,33 @@ namespace PLM
 {
     public class Module
     {
-        private List<Picture> _pictures;
+        //private List<Picture> _pictures;
         private string _moduleLocation = "Images";
+        private List<string> _wrongAnswers;
 
-        public List<Picture> Pictures
+        public string ModuleLocation
         {
-            get { return _pictures; }
-            set { _pictures = value; }
+            get { return _moduleLocation; }
+            set { _moduleLocation = value; }
         }
+        
+        public List<string> WrongAnswers
+        {
+            get { return _wrongAnswers; }
+            set { _wrongAnswers = value; }
+        }
+
+        public List<Picture> Pictures;
+        //public List<Picture> Pictures
+        //{
+        //    get { return _pictures; }
+        //    set { _pictures = value; }
+        //}
 
         public Module()
         {
-            _pictures = new List<Picture>();
+            Pictures = new List<Picture>();
+            _wrongAnswers = new List<string>();
             //AddPictures();
         }
 
@@ -27,7 +42,8 @@ namespace PLM
         public Module(string module)
         {
             _moduleLocation = module;
-            _pictures = new List<Picture>();
+            Pictures = new List<Picture>();
+            _wrongAnswers = new List<string>();
             //AddPictures();
         }
 
@@ -39,7 +55,7 @@ namespace PLM
 
             foreach (string location in files)
             {
-                _pictures.Add(new Picture(location, Path.GetFileNameWithoutExtension(location)));
+                //_pictures.Add(new Picture(location, Path.GetFileNameWithoutExtension(location)));
             }
         }
 
@@ -47,6 +63,10 @@ namespace PLM
         public void AddPicturesToList(Picture pic)
         {
             Pictures.Add(pic);
+        }
+        public void AddWrongAnswerToList(String answer)
+        {
+            WrongAnswers.Add(answer);
         }
     }
 }

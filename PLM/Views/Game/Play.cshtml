@@ -1,10 +1,16 @@
-﻿@using PLM.Models
-@model IEnumerable<Module>
+﻿@model Module
 @{
     ViewBag.Title = "View1";
 }
+<body>
+    <img id="picture" src="@Model.Pictures.ElementAt(0).Location" />
+    <p id="StoredAnswer">@Model.Pictures.ElementAt(0).Answer</p>
+    <div>
+        <p id="rightORwrong">0</p>
 
-<h2>View1</h2>
-
-<img src="" />
-
+        <button id="button1" onclick="ButtonClick(button1.innerText)">@Model.Pictures.ElementAt(0).Answer</button>
+        <button id="button2" onclick="ButtonClick(button2.innerText)">@Model.Pictures.ElementAt(1).Answer</button>
+        <button id="button3" onclick="ButtonClick(button3.innerText)">@Model.Pictures.ElementAt(2).Answer</button>
+    </div>
+    <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
+</body>

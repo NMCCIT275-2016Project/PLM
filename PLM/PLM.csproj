@@ -295,6 +295,7 @@
     <Content Include="Scripts\player-graphics.gif" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\gameplay.js" />
     <Content Include="Scripts\w.gif" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Scripts\_references.js" />

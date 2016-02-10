@@ -37,6 +37,16 @@ namespace PLM.Controllers
             currentModule.AddPicturesToList(pic1);
             currentModule.AddPicturesToList(pic2);
             currentModule.AddPicturesToList(pic3);
+            currentModule.AddWrongAnswerToList("Test 1");
+            currentModule.AddWrongAnswerToList("Test 2");
+            currentModule.AddWrongAnswerToList("Test 3");
+            currentModule.AddWrongAnswerToList("Test 4");
+            currentModule.AddWrongAnswerToList("Test 5");
+            currentModule.AddWrongAnswerToList("Test 6");
+            currentModule.AddWrongAnswerToList("Test 7");
+            currentModule.AddWrongAnswerToList("Test 8");
+            currentModule.AddWrongAnswerToList("Test 9");
+            currentModule.AddWrongAnswerToList("Test 10");
         }
 	}
 }
