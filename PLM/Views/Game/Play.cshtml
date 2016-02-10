@@ -2,15 +2,30 @@
 @{
     ViewBag.Title = "View1";
 }
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>About Us | Triangle</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Conent/animate.min.css" rel="stylesheet">
+    <link href="~/Conetnt/lightbox.css" rel="stylesheet">
+    <link href="~/Content/main.css" rel="stylesheet">
+    <link href="~/Content/responsive.css" rel="stylesheet">
+</head><!--/head-->
+
 <body>
     <img id="picture" src="@Model.Pictures.ElementAt(0).Location" />
     <p id="StoredAnswer">@Model.Pictures.ElementAt(0).Answer</p>
     <div>
         <p id="rightORwrong">0</p>
 
-        <button id="button1" onclick="ButtonClick(button1.innerText)">@Model.Pictures.ElementAt(0).Answer</button>
-        <button id="button2" onclick="ButtonClick(button2.innerText)">@Model.Pictures.ElementAt(1).Answer</button>
-        <button id="button3" onclick="ButtonClick(button3.innerText)">@Model.Pictures.ElementAt(2).Answer</button>
+        <button id="button1" class="btn btn-primary" onclick="ButtonClick(button1.innerText)">@Model.Pictures.ElementAt(0).Answer</button>
+        <button id="button2" class="btn btn-primary" onclick="ButtonClick(button2.innerText)">@Model.Pictures.ElementAt(1).Answer</button>
+        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.Pictures.ElementAt(2).Answer</button>
     </div>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
