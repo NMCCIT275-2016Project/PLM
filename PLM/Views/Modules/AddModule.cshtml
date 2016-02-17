@@ -1,6 +1,7 @@
-﻿
+﻿@model PLM.Module
+
 @{
-    ViewBag.Title = "Your Profile";
+    ViewBag.Title = "AddModule";
 }
 
 <head>
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Modules | Triangle</title>
+    <title>Add Module | Triangle</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/animate.min.css" rel="stylesheet">
@@ -16,10 +17,6 @@
     <link href="~/Content/main.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-    <![endif]-->
     <link rel="shortcut icon" href="~/Content/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/images/ico/apple-touch-icon-114-precomposed.png">
@@ -68,38 +65,46 @@
             <div class="row">
                 <div class="action">
                     <div class="col-sm-12">
-                        <h1 class="title">Your Profile</h1>
+                        <h1 class="title">Add Module</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--/#action-->
 
-<img class="floatLeft" src="~/Content/Images/blank-profile.png" alt="Profile Picture" height="200" width="200"/>
+<br/>
+<br/>
+<br/>
 
-<article>
-    <h3>Name:</h3>
-    <p>text</p>
+<form name="contact-form" method="post" action="/Modules/AddModule">
 
-    <h3>Username:</h3>
-    <p>text</p>
+    <label for="ModuleTitle">Title</label>
+    <div class="form-group">
+        <input type="text" id="ModuleTitle" name="name" class="form-control" required="required" placeholder="Module Name">
+    </div>
 
-    <h3>Email:</h3>
-    <p>Text</p>
+    <br/><br/>
 
-    <h3>Institution:</h3>
-    <p>Text</p>
+    <label for="ModuleImages">Images</label>
+    <div class="form-group, scroll-box">
+        <img src="~/Content/Images/portfolio/11.jpg" alt="Image1" />
+        <img src="~/Content/Images/portfolio/10.jpg" alt="Image2" />
+        <img src="~/Content/Images/portfolio/12.jpg" alt="Image1" />
+        <img src="~/Content/Images/portfolio/13.jpg" alt="Image2" />
+        <img src="~/Content/Images/portfolio/14.jpg" alt="Image1" />
+        <img src="~/Content/Images/portfolio/15.jpg" alt="Image2" />
+    </div>
 
-    <h3>Courses Created:</h3>
-    <p><a class="btn btn-default" href="~/Modules/AddModule">Add New &raquo;</a></p>
+    <br/><br/>
 
-</article>
+    <div class="form-group">
+        <input type="submit" name="operation" class="btn btn-success" value="Add" />
+        <input type="submit" name="operation" class="btn btn-success" value="Edit" />
+        <br/><br/>
+        <input type="submit" name="operation" class="btn btn-success" value="Remove" />
+        <input type="submit" name="operation" class="btn btn-success" value="Save" />
+        <input type="submit" name="submit" class="btn btn-submit floatRight" value="Submit">
+    </div>
+</form>
 
-@*<script type="text/javascript" src="~/Scripts/jquery.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="~/Scripts/gmaps.js"></script>
-    <script type="text/javascript" src="~/Scripts/wow.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/main.js"></script>*@
