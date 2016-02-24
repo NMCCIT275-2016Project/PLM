@@ -9,28 +9,23 @@ namespace PLM
     public class Picture
     {
         private string _location;
-        private string _answer;
+        private string _answerID;
+        private int _id;
 
-        public string Answer
+        public int ID
         {
-            get { return _answer; }
-            set { _answer = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-
+        public string AnswerID
+        {
+            get { return _answerID; }
+            set { _answerID = value; }
+        }
         public string Location
         {
             get { return _location; }
             set { _location = value; }
-        }
-
-        public Picture()
-        {
-
-        }
-        public Picture(string location, string answer)
-        {
-            this._location = location;
-            this._answer = answer;
         }
     }
 }

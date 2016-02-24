@@ -8,65 +8,30 @@ namespace PLM
 {
     public class Module
     {
-        //private List<Picture> _pictures;
-        private string _moduleLocation = "Images";
-        private List<string> _wrongAnswers;
+        private int _id;
+        private string _name;
+        private string _topic;
+        private int _authorID;
 
-        public string ModuleLocation
+        public int AuthorID
         {
-            get { return _moduleLocation; }
-            set { _moduleLocation = value; }
+            get { return _authorID; }
+            set { _authorID = value; }
         }
-        
-        public List<string> WrongAnswers
+        public string Topic
         {
-            get { return _wrongAnswers; }
-            set { _wrongAnswers = value; }
+            get { return _topic; }
+            set { _topic = value; }
         }
-
-        public List<Picture> Pictures;
-        //public List<Picture> Pictures
-        //{
-        //    get { return _pictures; }
-        //    set { _pictures = value; }
-        //}
-
-        public Module()
+        public string Name
         {
-            Pictures = new List<Picture>();
-            _wrongAnswers = new List<string>();
-            //AddPictures();
+            get { return _name; }
+            set { _name = value; }
         }
-
-        // Overloaded to add pictures specific to a module
-        public Module(string module)
+        public int ID
         {
-            _moduleLocation = module;
-            Pictures = new List<Picture>();
-            _wrongAnswers = new List<string>();
-            //AddPictures();
-        }
-
-        // Creates and adds pictures of a module and formats the properties
-        // of each picture for the game to handle
-        private void AddPictures()
-        {
-            string[] files = Directory.GetFiles(_moduleLocation, "*.png");
-
-            foreach (string location in files)
-            {
-                //_pictures.Add(new Picture(location, Path.GetFileNameWithoutExtension(location)));
-            }
-        }
-
-        // Using to get a base game working
-        public void AddPicturesToList(Picture pic)
-        {
-            Pictures.Add(pic);
-        }
-        public void AddWrongAnswerToList(String answer)
-        {
-            WrongAnswers.Add(answer);
+            get { return _id; }
+            set { _id = value; }
         }
     }
 }
