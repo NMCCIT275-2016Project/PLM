@@ -17,7 +17,7 @@ namespace PLM
             get { return _moduleID; }
             set { _moduleID = value; }
         }
-        public string Answer
+        public string AnswerString
         {
             get { return _answer; }
             set { _answer = value; }

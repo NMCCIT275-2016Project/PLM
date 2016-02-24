@@ -12,6 +12,13 @@ namespace PLM
         private string _name;
         private string _topic;
         private int _authorID;
+        private string[] _answers;
+
+        public string[] Answers
+        {
+            get { return _answers; }
+            set { _answers = value; }
+        }
 
         public int AuthorID
         {
