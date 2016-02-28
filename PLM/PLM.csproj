@@ -177,7 +177,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\PLM_DB.cs" />
+    <Compile Include="Models\PLMContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -8,24 +8,12 @@ namespace PLM
 {
     public class Answer
     {
-        private int _id;
-        private string _answer;
-        private int _moduleID;
+        public int AnswerID { get; set; }
+        public string AnswerString { get; set; }
+        public int ModuleID { get; set; }
+        public int test;
 
-        public int ModuleID
-        {
-            get { return _moduleID; }
-            set { _moduleID = value; }
-        }
-        public string AnswerString
-        {
-            get { return _answer; }
-            set { _answer = value; }
-        }
-        public int ID
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public virtual Module Module { get; set; }
+        public virtual List<Picture> Pictures { get; set; }
     }
 }

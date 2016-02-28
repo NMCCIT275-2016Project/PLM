@@ -8,37 +8,10 @@ namespace PLM
 {
     public class Module
     {
-        private int _id;
-        private string _name;
-        private string _topic;
-        private int _authorID;
-        private string[] _answers;
+        public int ModuleID { get; set; }
+        public string Name { get; set; }
+        public string Topic { get; set; }
 
-        public string[] Answers
-        {
-            get { return _answers; }
-            set { _answers = value; }
-        }
-
-        public int AuthorID
-        {
-            get { return _authorID; }
-            set { _authorID = value; }
-        }
-        public string Topic
-        {
-            get { return _topic; }
-            set { _topic = value; }
-        }
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        public int ID
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public virtual List<Answer> Answers { get; set; }
     }
 }
