@@ -248,6 +248,7 @@
     <Content Include="Content\Images\home\client5.png" />
     <Content Include="Content\Images\home\client6.png" />
     <Content Include="Content\Images\home\clients.png" />
+    <Content Include="Content\Images\home\create.png" />
     <Content Include="Content\Images\home\cycle.png" />
     <Content Include="Content\Images\home\footer.png" />
     <Content Include="Content\Images\home\icon1.png" />
@@ -256,6 +257,8 @@
     <Content Include="Content\Images\home\image1.png" />
     <Content Include="Content\Images\home\image2.png" />
     <Content Include="Content\Images\home\image3.png" />
+    <Content Include="Content\Images\home\join.png" />
+    <Content Include="Content\Images\home\learn.png" />
     <Content Include="Content\Images\home\profile1.png" />
     <Content Include="Content\Images\home\profile2.png" />
     <Content Include="Content\Images\home\slider-bg.png" />
@@ -264,6 +267,8 @@
     <Content Include="Content\Images\home\slider\hill.png" />
     <Content Include="Content\Images\home\slider\house.png" />
     <Content Include="Content\Images\home\slider\sun.png" />
+    <Content Include="Content\Images\home\ThinkGraphic.jpg" />
+    <Content Include="Content\Images\home\ThinkGraphicColor.jpg" />
     <Content Include="Content\Images\home\tour-bg.png" />
     <Content Include="Content\Images\home\tour-icon1.png" />
     <Content Include="Content\Images\home\tour-icon2.png" />
