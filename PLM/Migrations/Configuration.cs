@@ -25,7 +25,6 @@ namespace PLM.Migrations
                   new Module { Name = "Food", Topic = "Food", ModuleID = 2 },
                   new Module { Name = "Shows", Topic = "Shows", ModuleID = 3 }
                 );
-            
         }
     }
 }
