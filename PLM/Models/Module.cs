@@ -13,5 +13,6 @@ namespace PLM
         public string Topic { get; set; }
 
         public virtual List<Answer> Answers { get; set; }
+        public virtual User User { get; set; }
     }
 }

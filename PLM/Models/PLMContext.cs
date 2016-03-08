@@ -19,5 +19,6 @@ namespace PLM
         public DbSet<Module> Modules { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
