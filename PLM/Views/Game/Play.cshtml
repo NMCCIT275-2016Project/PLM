@@ -18,14 +18,14 @@
 </head><!--/head-->
 
 <body>
-    <img id="picture" src="@Model.Pictures.ElementAt(0).Location" />
-    <p id="StoredAnswer">@Model.Pictures.ElementAt(0).Answer</p>
+    @*<img id="picture" src="@Model.Pictures.ElementAt(0).Location" />
+    <p id="StoredAnswer">@Model.Pictures.ElementAt(0).Answer</p>*@
     <div>
         <p id="rightORwrong">0</p>
 
-        <button id="button1" class="btn btn-primary" onclick="ButtonClick(button1.innerText)">@Model.Pictures.ElementAt(0).Answer</button>
+        @*<button id="button1" class="btn btn-primary" onclick="ButtonClick(button1.innerText)">@Model.Pictures.ElementAt(0).Answer</button>
         <button id="button2" class="btn btn-primary" onclick="ButtonClick(button2.innerText)">@Model.Pictures.ElementAt(1).Answer</button>
-        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.Pictures.ElementAt(2).Answer</button>
+        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.Pictures.ElementAt(2).Answer</button>*@
     </div>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
