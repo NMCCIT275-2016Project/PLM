@@ -48,7 +48,7 @@ namespace PLM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="AnswerID,AnswerString,ModuleID")] Answer answer)
+        public ActionResult Create([Bind(Include = "AnswerID,AnswerString,ModuleID")] Answer answer)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace PLM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="AnswerID,AnswerString,ModuleID")] Answer answer)
+        public ActionResult Edit([Bind(Include = "AnswerID,AnswerString,ModuleID")] Answer answer)
         {
             if (ModelState.IsValid)
             {

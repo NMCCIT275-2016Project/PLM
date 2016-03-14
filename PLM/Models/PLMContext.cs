@@ -11,7 +11,7 @@ namespace PLM
         // if we add "string connString" in PLMContext() as a parameter and
         // reference it in base() we can specify which database we want to use
         // instead of hard coding it, if we end up generating multiple ones
-        public PLMContext() : base("PLM_DB")
+        public PLMContext() : base("DefaultConnection")
         {
 
         }
