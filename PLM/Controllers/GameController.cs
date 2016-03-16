@@ -75,12 +75,12 @@ namespace PLM.Controllers
             WrongGuess = guessID;
             while (WrongAnswersGenerationNOTcompleted)
             {
-                while (GeneratedGuessIDs.Contains(WrongGuess))
-                {
-                    WrongGuess = rand.Next(0, (currentModule.Answers.Count - 1));
-                }
-                currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(WrongGuess).AnswerString);
-                GeneratedGuessIDs.Add(WrongGuess);
+            while (GeneratedGuessIDs.Contains(WrongGuess))
+            {
+                WrongGuess = rand.Next(0, (currentModule.Answers.Count - 1));
+            }
+            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(WrongGuess).AnswerString);
+            GeneratedGuessIDs.Add(WrongGuess);
 
                 if (GeneratedGuessIDs.Count < NumAnswersDifficultyBased)
                 {
