@@ -1,11 +1,14 @@
+//Sounds from http://www.freesfx.co.uk/
 var pictureAnswer = "default";
 var count = 0;
 
 function isGuessRight(answer, guess) {
     if (answer == guess) {
+        document.getElementById("audioCorrect").play();
         return true;
     }
     else {
+        document.getElementById("audioIncorrect").play();
         return false;
     }
 }

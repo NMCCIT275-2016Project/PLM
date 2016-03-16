@@ -45,7 +45,7 @@ namespace PLM.Controllers
                 GenerateModule(IDtoPASS);
 
             GenerateGuess();
-            return View(currentModule);
+            return View(currentGuess);
         }
 
         public ActionResult Setup()
