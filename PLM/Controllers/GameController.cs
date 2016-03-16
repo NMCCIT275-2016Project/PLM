@@ -15,10 +15,10 @@ namespace PLM.Controllers
         private List<Answer> UserCompletedAnswers = new List<Answer>();
         private List<int> GeneratedGuessIDs = new List<int>();
         private Random rand = new Random(DateTime.Today.Second);
-        private int guessID;
         private int answerID;
+        private int pictureID;
         private int NumAnswersDifficultyBased = 3;
-        private int WrongGuess;
+        private int wrongAnswerID;
         private bool WrongAnswersGenerationNOTcompleted = true;
 
         //Module currentModule;
@@ -58,13 +58,13 @@ namespace PLM.Controllers
 
         private void GenerateGuess()
         {
-            guessID = rand.Next(0, (currentModule.Answers.Count - 1));
-            answerID = rand.Next(0, (currentModule.Answers.ElementAt(guessID).Pictures.Count));
+            answerID = rand.Next(0, (currentModule.Answers.Count - 1));
+            pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
 
-            currentGuess.Answer = currentModule.Answers.ElementAt(guessID).AnswerString;
-            currentGuess.ImageURL = currentModule.Answers.ElementAt(guessID).Pictures.ElementAt(answerID).Location;
-            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(guessID).AnswerString);
-            GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(guessID).AnswerID);
+            currentGuess.Answer = currentModule.Answers.ElementAt(answerID).AnswerString;
+            currentGuess.ImageURL = currentModule.Answers.ElementAt(answerID).Pictures.ElementAt(pictureID).Location;
+            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);
+            GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(answerID).AnswerID);
 
             GenerateWrongAnswers();
         }
@@ -72,17 +72,17 @@ namespace PLM.Controllers
         private void GenerateWrongAnswers()
         {
             WrongAnswersGenerationNOTcompleted = true;
-            WrongGuess = guessID;
+            wrongAnswerID = answerID;
             while (WrongAnswersGenerationNOTcompleted)
             {
-            while (GeneratedGuessIDs.Contains(WrongGuess))
-            {
-                WrongGuess = rand.Next(0, (currentModule.Answers.Count - 1));
-            }
-            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(WrongGuess).AnswerString);
-            GeneratedGuessIDs.Add(WrongGuess);
+                while (GeneratedGuessIDs.Contains(wrongAnswerID))
+                {
+                    wrongAnswerID = rand.Next(0, (currentModule.Answers.Count - 1));
+                }
+                currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(wrongAnswerID).AnswerString);
+                GeneratedGuessIDs.Add(wrongAnswerID);
 
-                if (GeneratedGuessIDs.Count < NumAnswersDifficultyBased)
+                if (GeneratedGuessIDs.Count >= NumAnswersDifficultyBased)
                 {
                     WrongAnswersGenerationNOTcompleted = false;
                 }
