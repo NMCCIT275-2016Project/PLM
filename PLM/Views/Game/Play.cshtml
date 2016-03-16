@@ -1,4 +1,4 @@
-﻿@Model PlayViewModel
+﻿@model PLM.PlayViewModel
 @{
     ViewBag.Title = "View1";
 }
@@ -26,9 +26,9 @@
     <p id="StoredAnswer" display="none">@Model.Answer</p>
     <div>
         <p id="rightORwrong">0</p>
-        <button id="button1" class="btn btn-primary" onclick="ButtonClick(button1.innerText)">@Model.guesses.ElementAt(0)</button>
-        <button id="button2" class="btn btn-primary" onclick="ButtonClick(button2.innerText)">@Model.guesses.ElementAt(1)</button>
-        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.guesses.ElementAt(2)</button>
+        <button id="button1" class="btn btn-primary" onclick="ButtonClick(button1.innerText)">@Model.possibleAnswers.ElementAt(0)</button>
+        <button id="button2" class="btn btn-primary" onclick="ButtonClick(button2.innerText)">@Model.possibleAnswers.ElementAt(1)</button>
+        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.possibleAnswers.ElementAt(2)</button>
     </div>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
