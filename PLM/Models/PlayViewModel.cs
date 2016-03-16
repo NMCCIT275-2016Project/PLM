@@ -8,7 +8,7 @@ namespace PLM
     public class PlayViewModel
     {
         public string ImageURL;
-        public List<string> guesses;
+        public List<string> possibleAnswers;
         public string Answer;
     }
 }
