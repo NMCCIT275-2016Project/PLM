@@ -61,11 +61,15 @@ namespace PLM.Controllers
             answerID = rand.Next(0, (currentModule.Answers.Count - 1));
             pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
 
+            //add the initial stuff to the guess to send over
             currentGuess.Answer = currentModule.Answers.ElementAt(answerID).AnswerString;
             currentGuess.ImageURL = currentModule.Answers.ElementAt(answerID).Pictures.ElementAt(pictureID).Location;
             currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);
+
+            //add the correct answer to the generated guess ids (to prevent duplicate entries)
             GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(answerID).AnswerID);
 
+            //Generate a random selection of wrong answers and add them to the possible answers.
             GenerateWrongAnswers();
             //shuffle the list of possible answers so that the first answer isn't always the right one.
             currentGuess.possibleAnswers.Shuffle();
@@ -73,17 +77,23 @@ namespace PLM.Controllers
 
         private void GenerateWrongAnswers()
         {
+            //while we still have work to do
             while (WrongAnswersGenerationNOTcompleted)
             {
+                //for as long as the selected answer is a duplicate
                 while (GeneratedGuessIDs.Contains(wrongAnswerID))
                 {
+                    //get a new, randomly selected answer
                     wrongAnswerID = rand.Next(0, (currentModule.Answers.Count - 1));
                 }
+                //add the selected answer to both the stuff to send over and the list of no longer addable answers
                 currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(wrongAnswerID).AnswerString);
                 GeneratedGuessIDs.Add(wrongAnswerID);
 
+                //if we've completed our work
                 if (GeneratedGuessIDs.Count >= NumAnswersDifficultyBased)
                 {
+                    //break out of the loop
                     WrongAnswersGenerationNOTcompleted = false;
                 }
             }

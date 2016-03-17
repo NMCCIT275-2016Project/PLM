@@ -29,9 +29,7 @@
         @for (int i = 0; i < Model.possibleAnswers.Count; i++)
         { 
         @*the javascript "this" keyword is used in the function call to refer to the sender, instead of an id.*@
-        <button @*id="button1"*@ class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
-        @*<button id="button2" class="btn btn-primary" onclick="ButtonClick(button2.innerText)">@Model.possibleAnswers.ElementAt(1)</button>
-        <button id="button3" class="btn btn-primary" onclick="ButtonClick(button3.innerText)">@Model.possibleAnswers.ElementAt(2)</button>*@
+        <button class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
         }
     </div>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
