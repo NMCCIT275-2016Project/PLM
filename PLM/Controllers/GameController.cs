@@ -14,7 +14,7 @@ namespace PLM.Controllers
         private bool PLMgenerated = false;
         private List<Answer> UserCompletedAnswers = new List<Answer>();
         private List<int> GeneratedGuessIDs = new List<int>();
-        private Random rand = new Random(DateTime.Today.Second);
+        private static Random rand = new Random();
         private int answerID;
         private int pictureID;
         private int NumAnswersDifficultyBased = 3;
@@ -67,12 +67,12 @@ namespace PLM.Controllers
             GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(answerID).AnswerID);
 
             GenerateWrongAnswers();
+            //shuffle the list of possible answers so that the first answer isn't always the right one.
+            currentGuess.possibleAnswers.Shuffle();
         }
 
         private void GenerateWrongAnswers()
         {
-            WrongAnswersGenerationNOTcompleted = true;
-            wrongAnswerID = answerID;
             while (WrongAnswersGenerationNOTcompleted)
             {
                 while (GeneratedGuessIDs.Contains(wrongAnswerID))
