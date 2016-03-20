@@ -12,8 +12,8 @@ namespace PLM.Controllers
         private Module currentModule = new Module();
         private PlayViewModel currentGuess = new PlayViewModel();
         private bool PLMgenerated = false;
-        private List<Answer> UserCompletedAnswers = new List<Answer>();
         private List<int> GeneratedGuessIDs = new List<int>();
+        private int currentGuessCount = 0;
         private static Random rand = new Random();
         private int answerID;
         private int pictureID;
@@ -46,6 +46,13 @@ namespace PLM.Controllers
             return View(currentGuess);
         }
 
+        [HttpPost]
+        public ActionResult PlayNext()
+        {
+            GenerateGuess();
+            return View(currentGuess);
+        }
+
         public ActionResult Setup()
         {
             return View();
@@ -54,11 +61,13 @@ namespace PLM.Controllers
         private void GenerateModule(int PLMid)
         {
             currentModule = db.Modules.Find(PLMid);
+            currentModule.Answers.Shuffle();
         }
 
         private void GenerateGuess()
         {
-            answerID = rand.Next(0, (currentModule.Answers.Count - 1));
+            currentGuessCount++;
+            answerID = currentGuessCount;
             pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
 
             //add the initial stuff to the guess to send over
