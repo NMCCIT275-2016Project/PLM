@@ -26,11 +26,20 @@
     <p id="StoredAnswer" display="none">@Model.Answer</p>
     <div>
         <p id="rightORwrong">0</p>
-        @for (int i = 0; i < Model.possibleAnswers.Count; i++)
-        { 
-        @*the javascript "this" keyword is used in the function call to refer to the sender, instead of an id.*@
-        <button class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
-        }
+        <div id="answerButtons">
+            @for (int i = 0; i < Model.possibleAnswers.Count; i++)
+            {
+                @*the javascript "this" keyword is used in the function call to refer to the sender, instead of an id.*@
+                <button class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
+            }
+        </div>
     </div>
+    <br />
+    <form method="post">
+        <div id="nextButton" style="display:none;">
+            @*<input type="text" value="@Model.>"*@
+            <button id="next" type="submit">Next</button>
+        </div>
+    </form>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
