@@ -434,10 +434,6 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Modules\AddModule.cshtml" />
-    <Content Include="Views\Modules\AddImage.cshtml" />
-    <Content Include="Views\Modules\RemoveImage.cshtml" />
-    <Content Include="Views\Modules\EditImage.cshtml" />
-    <Content Include="Views\Modules\SaveModule.cshtml" />
     <Content Include="Views\Answers\Create.cshtml" />
     <Content Include="Views\Answers\Delete.cshtml" />
     <Content Include="Views\Answers\Details.cshtml" />

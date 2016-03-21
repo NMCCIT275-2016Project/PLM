@@ -8,10 +8,11 @@ namespace PLM.Controllers
 {
     public class ProfileController : Controller
     {
+        private PLMContext db = new PLMContext();
         // GET: Profile
         public ActionResult Index()
         {
-            return View();
+            return View(db.Modules.ToList());
         }
     }
 }
