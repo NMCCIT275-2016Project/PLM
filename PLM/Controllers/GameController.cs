@@ -8,6 +8,19 @@ namespace PLM.Controllers
 {
     public class GameController : Controller
     {
+        private PLMContext db = new PLMContext();
+        private Module currentModule = new Module();
+        private PlayViewModel currentGuess = new PlayViewModel();
+        private bool PLMgenerated = false;
+        private List<int> GeneratedGuessIDs = new List<int>();
+        private int currentGuessCount = 0;
+        private static Random rand = new Random();
+        private int answerID;
+        private int pictureID;
+        private int NumAnswersDifficultyBased = 3;
+        private int wrongAnswerID;
+        private bool WrongAnswersGenerationNOTcompleted = true;
+
         //Module currentModule;
         //
         // GET: /Game/
@@ -16,11 +29,29 @@ namespace PLM.Controllers
             return View();
         }
 
+        public ActionResult Play(int? PLMid)
+        {
+            // Added the '?' after int to make the value optional
+            // Need to figure out how to set an optional int to an int
+            int IDtoPASS = 0;
+            if (PLMid == null)
+            {
+                IDtoPASS = 1;
+            }
+
+            if (PLMgenerated == false)
+                GenerateModule(IDtoPASS);
+
+            GenerateGuess();
+            return View(currentGuess);
+        }
+
+        [HttpPost]
+
         public ActionResult Play()
         {
-            //GenerateModule();
-
-            return View();
+            GenerateGuess();
+            return View(currentGuess);
         }
 
         public ActionResult Setup()
@@ -28,25 +59,54 @@ namespace PLM.Controllers
             return View();
         }
 
-        //private void GenerateModule()
-        //{
-        //    currentModule = new Module();
-        //    Picture pic1 = new Picture("https://cloud.githubusercontent.com/assets/16091910/12891557/83df8506-ce56-11e5-88c2-2fc434b476fc.jpg", "answer 1");
-        //    Picture pic2 = new Picture("https://cloud.githubusercontent.com/assets/16091910/12891556/83df5a40-ce56-11e5-8198-45705d2127a2.jpg", "answer 2");
-        //    Picture pic3 = new Picture("https://cloud.githubusercontent.com/assets/16091910/12891553/83da2f34-ce56-11e5-99c1-69f4e1c98fe9.jpg", "answer 3");
-        //    currentModule.AddPicturesToList(pic1);
-        //    currentModule.AddPicturesToList(pic2);
-        //    currentModule.AddPicturesToList(pic3);
-        //    currentModule.AddWrongAnswerToList("Test 1");
-        //    currentModule.AddWrongAnswerToList("Test 2");
-        //    currentModule.AddWrongAnswerToList("Test 3");
-        //    currentModule.AddWrongAnswerToList("Test 4");
-        //    currentModule.AddWrongAnswerToList("Test 5");
-        //    currentModule.AddWrongAnswerToList("Test 6");
-        //    currentModule.AddWrongAnswerToList("Test 7");
-        //    currentModule.AddWrongAnswerToList("Test 8");
-        //    currentModule.AddWrongAnswerToList("Test 9");
-        //    currentModule.AddWrongAnswerToList("Test 10");
-        //}
-	}
+        private void GenerateModule(int PLMid)
+        {
+            currentModule = db.Modules.Find(PLMid);
+            currentModule.Answers.Shuffle();
+        }
+
+        private void GenerateGuess()
+        {
+            currentGuessCount++;
+            answerID = currentGuessCount;
+            pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
+
+            //add the initial stuff to the guess to send over
+            currentGuess.Answer = currentModule.Answers.ElementAt(answerID).AnswerString;
+            currentGuess.ImageURL = currentModule.Answers.ElementAt(answerID).Pictures.ElementAt(pictureID).Location;
+            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);
+
+            //add the correct answer to the generated guess ids (to prevent duplicate entries)
+            GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(answerID).AnswerID);
+
+            //Generate a random selection of wrong answers and add them to the possible answers.
+            GenerateWrongAnswers();
+            //shuffle the list of possible answers so that the first answer isn't always the right one.
+            currentGuess.possibleAnswers.Shuffle();
+        }
+
+        private void GenerateWrongAnswers()
+        {
+            //while we still have work to do
+            while (WrongAnswersGenerationNOTcompleted)
+            {
+                //for as long as the selected answer is a duplicate
+                while (GeneratedGuessIDs.Contains(wrongAnswerID))
+                {
+                    //get a new, randomly selected answer
+                    wrongAnswerID = rand.Next(0, (currentModule.Answers.Count - 1));
+                }
+                //add the selected answer to both the stuff to send over and the list of no longer addable answers
+                currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(wrongAnswerID).AnswerString);
+                GeneratedGuessIDs.Add(wrongAnswerID);
+
+                //if we've completed our work
+                if (GeneratedGuessIDs.Count >= NumAnswersDifficultyBased)
+                {
+                    //break out of the loop
+                    WrongAnswersGenerationNOTcompleted = false;
+                }
+            }
+        }
+    }
 }
