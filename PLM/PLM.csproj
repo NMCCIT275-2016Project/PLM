@@ -168,6 +168,7 @@
     <Compile Include="Controllers\ModulesEDITController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Extensions\FTPDirectoryWriter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

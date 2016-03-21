@@ -47,7 +47,8 @@ namespace PLM.Controllers
         }
 
         [HttpPost]
-        public ActionResult PlayNext()
+
+        public ActionResult Play()
         {
             GenerateGuess();
             return View(currentGuess);
