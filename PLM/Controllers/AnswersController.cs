@@ -57,7 +57,7 @@ namespace PLM.Controllers
                 return RedirectToAction("create", new { controller = "Modules" });
             }
 
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name", answer.ModuleID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name");
             return View(answer);
         }
 
@@ -73,7 +73,7 @@ namespace PLM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name", answer.ModuleID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name");
             return View(answer);
         }
 
@@ -90,7 +90,7 @@ namespace PLM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("create", new { controller = "Modules" });
             }
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name", answer.ModuleID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name");
             return View(answer);
         }
 
@@ -117,7 +117,7 @@ namespace PLM.Controllers
             Answer answer = db.Answers.Find(id);
             db.Answers.Remove(answer);
             db.SaveChanges();
-            return RedirectToAction("edit", new { controller = "ModulesEdit", id });
+            return RedirectToAction("edit", new { controller = "ModulesEdit", id = answer.ModuleID});
         }
 
         protected override void Dispose(bool disposing)

@@ -13,18 +13,23 @@ namespace PLM.Controllers
         private PlayViewModel currentGuess = new PlayViewModel();
         private bool PLMgenerated = false;
         private List<int> GeneratedGuessIDs = new List<int>();
-        private int currentGuessCount = 0;
         private static Random rand = new Random();
         private int answerID;
         private int pictureID;
         private int NumAnswersDifficultyBased = 3;
         private int wrongAnswerID;
         private bool WrongAnswersGenerationNOTcompleted = true;
+        private UserGameSession currentGameSession;
 
         //Module currentModule;
         //
         // GET: /Game/
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Complete()
         {
             return View();
         }
@@ -50,6 +55,10 @@ namespace PLM.Controllers
         public ActionResult Play()
         {
             //currentModule = 
+            if (IsGameDone())
+            {
+                return RedirectToAction("Complete");
+            }
             GenerateGuess();
             return View(currentGuess);
         }
@@ -59,16 +68,35 @@ namespace PLM.Controllers
             return View();
         }
 
+        private bool IsGameDone()
+        {
+            currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
+            if (((UserGameSession)Session["userGameSession"]).currentGuess >= currentModule.Answers.Count)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
         private void GenerateModule(int PLMid)
         {
             currentModule = db.Modules.Find(PLMid);
             currentModule.Answers.Shuffle();
+            currentGameSession = new UserGameSession();
+            currentGameSession.Score = 0;
+            currentGameSession.currentGuess = 30;
+            currentGameSession.currentModule = currentModule;
+
+            Session["userGameSession"] = currentGameSession;
         }
 
         private void GenerateGuess()
         {
-            currentGuessCount++;
-            answerID = currentGuessCount;
+            ((UserGameSession)Session["userGameSession"]).currentGuess++;
+            currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
+            answerID = ((UserGameSession)Session["userGameSession"]).currentGuess;
+            answerID--;
             pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
 
             //add the initial stuff to the guess to send over
