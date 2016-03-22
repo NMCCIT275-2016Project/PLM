@@ -54,7 +54,7 @@ namespace PLM.Controllers
             {
                 db.Answers.Add(answer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("create", new { controller = "Modules" });
             }
 
             ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name", answer.ModuleID);
@@ -88,7 +88,7 @@ namespace PLM.Controllers
             {
                 db.Entry(answer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("create", new { controller = "Modules" });
             }
             ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Name", answer.ModuleID);
             return View(answer);
@@ -117,7 +117,7 @@ namespace PLM.Controllers
             Answer answer = db.Answers.Find(id);
             db.Answers.Remove(answer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("edit", new { controller = "ModulesEdit", id });
         }
 
         protected override void Dispose(bool disposing)

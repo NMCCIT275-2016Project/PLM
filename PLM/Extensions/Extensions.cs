@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PLM
 {
-    public static class Extensions
+    public static class ShuffleExtension
     {
         //this randomization method, based on the Fisher-Yates shuffle, was taken from http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp
         private static Random rand = new Random();
