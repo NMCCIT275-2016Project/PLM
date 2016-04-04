@@ -85,7 +85,7 @@ namespace PLM.Controllers
             currentModule.Answers.Shuffle();
             currentGameSession = new UserGameSession();
             currentGameSession.Score = 0;
-            currentGameSession.currentGuess = 30;
+            currentGameSession.currentGuess = 0;
             currentGameSession.currentModule = currentModule;
 
             Session["userGameSession"] = currentGameSession;
