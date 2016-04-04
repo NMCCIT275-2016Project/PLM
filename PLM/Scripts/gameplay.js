@@ -5,12 +5,14 @@ var count = 0;
 function isGuessRight(answer, guess) {
     if (answer == guess) {
         document.getElementById("audioCorrect").play();
+        document.getElementById("resultText").innerText = ("Indubitably, the correct answer is in fact " + answer);
         reveal();
         showNext();
         return true;
     }
     else {
         document.getElementById("audioIncorrect").play();
+        document.getElementById("resultText").innerText = ("Preposterous, the correct answer was actually " + answer);
         reveal();
         showNext();
         return false;
