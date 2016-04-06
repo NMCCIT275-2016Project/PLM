@@ -26,6 +26,7 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioCorrect").play();
         }
+        document.getElementById("resultText").innerText = ("Indubitably, the correct answer is in fact " + answer);
         reveal();
         showNext();
         return true;
@@ -34,6 +35,7 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioIncorrect").play();
         }
+        document.getElementById("resultText").innerText = ("Preposterous, the correct answer was actually " + answer);
         reveal();
         showNext();
         return false;
