@@ -54,7 +54,6 @@ namespace PLM.Controllers
         [HttpPost]
         public ActionResult Play()
         {
-            //currentModule = 
             if (IsGameDone())
             {
                 return RedirectToAction("Complete");
@@ -85,7 +84,8 @@ namespace PLM.Controllers
             currentModule.Answers.Shuffle();
             currentGameSession = new UserGameSession();
             currentGameSession.Score = 0;
-            currentGameSession.currentGuess = 0;
+            // set to -1 because GenerateGuess() will increment it to 0 the first time it runs
+            currentGameSession.currentGuess = -1;
             currentGameSession.currentModule = currentModule;
 
             Session["userGameSession"] = currentGameSession;
@@ -96,7 +96,6 @@ namespace PLM.Controllers
             ((UserGameSession)Session["userGameSession"]).currentGuess++;
             currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
             answerID = ((UserGameSession)Session["userGameSession"]).currentGuess;
-            answerID--;
             pictureID = rand.Next(0, (currentModule.Answers.ElementAt(answerID).Pictures.Count - 1));
 
             //add the initial stuff to the guess to send over
@@ -115,6 +114,7 @@ namespace PLM.Controllers
 
         private void GenerateWrongAnswers()
         {
+            wrongAnswerID = answerID;
             //while we still have work to do
             while (WrongAnswersGenerationNOTcompleted)
             {
@@ -129,6 +129,8 @@ namespace PLM.Controllers
                 GeneratedGuessIDs.Add(wrongAnswerID);
 
                 //if we've completed our work
+                // TODO - Add functionality that checks if the module has enough answers to reach
+                // the value of NumAnswersDifficultBased so that an error isn't thrown
                 if (GeneratedGuessIDs.Count >= NumAnswersDifficultyBased)
                 {
                     //break out of the loop
