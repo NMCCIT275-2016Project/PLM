@@ -71,7 +71,7 @@ function reveal() {
 
 function Correct() {
     count = (count + 100);
-    document.getElementById("rightORwrong").innerText = count;
+    document.getElementById("score").innerText = count;
 }
 
 //Toggle whether sound will play
