@@ -10,10 +10,12 @@ namespace PLM
         public string ImageURL;
         public List<string> possibleAnswers;
         public string Answer;
+        public int Score;
 
         public PlayViewModel()
         {
             possibleAnswers = new List<string>();
+            Score = 0;
         }
     }
 }

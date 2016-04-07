@@ -25,7 +25,7 @@
     <img id="picture" src="@Model.ImageURL" />
     <p id="StoredAnswer" display="none">@Model.Answer</p>
     <div>
-        <p id="rightORwrong">0</p>
+        <p id="score">0</p>
         <div id="answerButtons">
             @for (int i = 0; i < Model.possibleAnswers.Count; i++)
             {
@@ -39,7 +39,11 @@
         <div id="nextButton" style="display:none;">
             @*<input type="text" value="@Model.>"*@
             <button id="next" type="submit">Next</button>
+            <h1 id="resultText">Correct</h1>
         </div>
     </form>
+    <br />
+    <br />
+    <button onclick="ToggleMute()">Mute/Unmute</button>
     <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
