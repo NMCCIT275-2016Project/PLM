@@ -54,7 +54,7 @@ namespace PLM.Controllers
             {
                 db.Pictures.Add(picture);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("edit", new { controller = "Answers", id = picture.AnswerID });
             }
 
             ViewBag.AnswerID = new SelectList(db.Answers, "AnswerID", "AnswerString", picture.AnswerID);
@@ -88,7 +88,7 @@ namespace PLM.Controllers
             {
                 db.Entry(picture).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("edit", new { controller = "Answers", id = picture.AnswerID });
             }
             ViewBag.AnswerID = new SelectList(db.Answers, "AnswerID", "AnswerString", picture.AnswerID);
             return View(picture);
@@ -117,7 +117,7 @@ namespace PLM.Controllers
             Picture picture = db.Pictures.Find(id);
             db.Pictures.Remove(picture);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("edit", new { controller = "Answers", id = picture.AnswerID });
         }
 
         protected override void Dispose(bool disposing)

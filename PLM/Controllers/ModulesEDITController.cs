@@ -52,7 +52,7 @@ namespace PLM.Controllers
             {
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { controller = "Profile"});
             }
 
             return View(module);
@@ -84,7 +84,7 @@ namespace PLM.Controllers
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { controller = "Profile" });
             }
             return View(module);
         }
@@ -112,7 +112,7 @@ namespace PLM.Controllers
             Module module = db.Modules.Find(id);
             db.Modules.Remove(module);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { controller = "Profile" });
         }
 
         protected override void Dispose(bool disposing)

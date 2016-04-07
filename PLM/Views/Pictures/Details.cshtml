@@ -77,5 +77,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PictureID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "edit", new { controller = "Answers", id = Model.AnswerID });
 </p>

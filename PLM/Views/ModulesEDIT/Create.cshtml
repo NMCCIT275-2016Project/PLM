@@ -80,10 +80,6 @@
 
         <br/>
 
-        <p>
-            @Html.ActionLink("Add New Answer", "Create", new { controller = "Answers" })
-        </p>
-
         <br/>
         <br/>
         <div class="form-group">
@@ -95,7 +91,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { controller = "Profile"});
 </div>
 
 @section Scripts {
