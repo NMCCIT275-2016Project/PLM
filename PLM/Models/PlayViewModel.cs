@@ -15,7 +15,7 @@ namespace PLM
         public PlayViewModel()
         {
             possibleAnswers = new List<string>();
-            Score = 10;
+            Score = 0;
         }
     }
 }

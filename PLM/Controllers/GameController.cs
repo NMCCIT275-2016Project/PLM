@@ -16,7 +16,7 @@ namespace PLM.Controllers
         private static Random rand = new Random();
         private int answerID;
         private int pictureID;
-        private int NumAnswersDifficultyBased = 10;
+        private int NumAnswersDifficultyBased = 5;
         private int wrongAnswerID;
         private bool WrongAnswersGenerationNOTcompleted = true;
         private UserGameSession currentGameSession;
@@ -52,15 +52,15 @@ namespace PLM.Controllers
         }
 
         [HttpPost]
-        public ActionResult Play([Bind(Include= "Score")] PlayViewModel pvm)
+        public ActionResult Play(int Score)
         {
-            ((UserGameSession)Session["userGameSession"]).Score = pvm.Score;
+            ((UserGameSession)Session["userGameSession"]).Score = Score;
             if (IsGameDone())
             {
                 return RedirectToAction("Complete");
             }
             GenerateGuess();
-            currentGuess.Score = pvm.Score;
+            currentGuess.Score = Score;
             return View(currentGuess);
         }
 

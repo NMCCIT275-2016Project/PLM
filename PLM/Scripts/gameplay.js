@@ -70,7 +70,7 @@ function reveal() {
 }
 
 function Correct() {
-    count = (count + 100);
+    count = (parseInt(count) + 100);
     document.getElementById("Score").value = count;
     document.getElementById("displayScore").innerText = count;
 }
