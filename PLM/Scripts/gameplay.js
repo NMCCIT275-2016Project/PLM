@@ -1,6 +1,6 @@
 //Sounds from http://www.freesfx.co.uk/
 var pictureAnswer = "default";
-var count = 0;
+var count = document.getElementById("displayScore").innerText;
 
 //These cookie functions are from w3schools
 function setCookie(cname, cvalue, exdays) {
@@ -71,7 +71,8 @@ function reveal() {
 
 function Correct() {
     count = (count + 100);
-    document.getElementById("score").innerText = count;
+    document.getElementById("Score").value = count;
+    document.getElementById("displayScore").innerText = count;
 }
 
 //Toggle whether sound will play
