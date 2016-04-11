@@ -8,18 +8,21 @@ namespace PLM.Controllers
 {
     public class GameController : Controller
     {
+        private static Random rand = new Random();
+
+        private UserGameSession currentGameSession;
         private PLMContext db = new PLMContext();
         private Module currentModule = new Module();
-        private PlayViewModel currentGuess = new PlayViewModel();
-        private bool PLMgenerated = false;
         private List<int> GeneratedGuessIDs = new List<int>();
-        private static Random rand = new Random();
+        private PlayViewModel currentGuess = new PlayViewModel();
+
+        private bool PLMgenerated = false;
+        private bool WrongAnswersGenerationNOTcompleted = true;
+
         private int answerID;
         private int pictureID;
-        private int NumAnswersDifficultyBased = 5;
         private int wrongAnswerID;
-        private bool WrongAnswersGenerationNOTcompleted = true;
-        private UserGameSession currentGameSession;
+        private int NumAnswersDifficultyBased = 5;
 
         //Module currentModule;
         //
@@ -106,26 +109,25 @@ namespace PLM.Controllers
             currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);
 
             //add the correct answer to the generated guess ids (to prevent duplicate entries)
-            GeneratedGuessIDs.Add(currentModule.Answers.ElementAt(answerID).AnswerID);
+            GeneratedGuessIDs.Add(answerID);
 
             //Generate a random selection of wrong answers and add them to the possible answers.
             GenerateWrongAnswers();
+
             //shuffle the list of possible answers so that the first answer isn't always the right one.
             currentGuess.possibleAnswers.Shuffle();
         }
 
         private void GenerateWrongAnswers()
         {
-            wrongAnswerID = answerID;
             //while we still have work to do
             while (WrongAnswersGenerationNOTcompleted)
             {
-                //for as long as the selected answer is a duplicate
-                while (GeneratedGuessIDs.Contains(wrongAnswerID))
+                do
                 {
-                    //get a new, randomly selected answer
                     wrongAnswerID = rand.Next(0, (currentModule.Answers.Count - 1));
-                }
+                } while (GeneratedGuessIDs.Contains(wrongAnswerID));
+
                 //add the selected answer to both the stuff to send over and the list of no longer addable answers
                 currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(wrongAnswerID).AnswerString);
                 GeneratedGuessIDs.Add(wrongAnswerID);
