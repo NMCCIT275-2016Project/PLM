@@ -14,6 +14,7 @@
     <link href="~/Conetnt/lightbox.css" rel="stylesheet">
     <link href="~/Content/main.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
+    <link href="~/Content/test.css" rel="stylesheet">
 </head>
 <body>
     <audio id="audioCorrect" preload="auto">
@@ -22,28 +23,36 @@
     <audio id="audioIncorrect" preload="auto">
         <source src="~/Content/Audio/incorrectSound.mp3" type="audio/mp3" />
     </audio>
-    <img id="picture" src="@Model.ImageURL" />
-    <p id="StoredAnswer" hidden="hidden">@Model.Answer</p>
-    <p id="displayScore">@Model.Score</p>
-    <div>
-        <div id="answerButtons">
-            @for (int i = 0; i < Model.possibleAnswers.Count; i++)
-            {
-                @*the javascript "this" keyword is used in the function call to refer to the sender, instead of an id.*@
-                <button class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
-            }
+
+    <div id="gameBoard">
+        <img id="picture" src="@Model.ImageURL" />
+        <p id="StoredAnswer" hidden="hidden">@Model.Answer</p>
+
+        <div id="ScoreBoard">
+            <p>Score:</p>
+            <p id="displayScore">@Model.Score</p>
         </div>
+
+        <div>
+            <div id="answerButtons">
+                @for (int i = 0; i < Model.possibleAnswers.Count; i++)
+                {
+                    @*the javascript "this" keyword is used in the function call to refer to the sender, instead of an id.*@
+                    <button class="btn btn-primary" onclick="ButtonClick(this.innerText)">@Model.possibleAnswers.ElementAt(i)</button>
+                }
+            </div>
+        </div>
+        <br />
+        <form method="post">
+            <input id="Score" name="Score" hidden="hidden" type="number" value="@Model.Score" />
+            <div id="nextButton" style="display:none;">
+                <button id="next" type="submit" value="">Next</button>
+                <h1 id="resultText">Correct</h1>
+            </div>
+        </form>
+        <br />
+        <br />
+        <button onclick="ToggleMute()">Mute/Unmute</button>
+        <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
     </div>
-    <br />
-    <form method="post">
-        <input id ="Score" name="Score" hidden="hidden" type="number" value="@Model.Score" />
-        <div id="nextButton" style="display:none;">
-            <button id="next" type="submit" value="">Next</button>
-            <h1 id="resultText">Correct</h1>
-        </div>
-    </form>
-    <br />
-    <br />
-    <button onclick="ToggleMute()">Mute/Unmute</button>
-    <script type="text/javascript" src="~/Scripts/gameplay.js"></script>
 </body>
