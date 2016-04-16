@@ -10,5 +10,11 @@ namespace PLM
         public int Score;
         public int currentGuess;
         public Module currentModule;
+        public List<Picture> Pictures;
+
+        public UserGameSession()
+        {
+            Pictures = new List<Picture>();
+        }
     }
 }

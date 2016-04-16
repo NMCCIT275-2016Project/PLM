@@ -11,10 +11,11 @@ namespace PLM.Controllers
         private static Random rand = new Random();
 
         private UserGameSession currentGameSession;
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         private Module currentModule = new Module();
         private List<int> GeneratedGuessIDs = new List<int>();
         private PlayViewModel currentGuess = new PlayViewModel();
+        private int currentGuessNum;
 
         private bool PLMgenerated = false;
         private bool WrongAnswersGenerationNOTcompleted = true;
@@ -50,7 +51,7 @@ namespace PLM.Controllers
             if (PLMgenerated == false)
                 GenerateModule(IDtoPASS);
 
-            GenerateGuess();
+            GenerateGuessONEperANS();
             return View(currentGuess);
         }
 
@@ -62,7 +63,7 @@ namespace PLM.Controllers
             {
                 return RedirectToAction("Complete");
             }
-            GenerateGuess();
+            GenerateGuessONEperPIC();
             currentGuess.Score = Score;
             return View(currentGuess);
         }
@@ -75,7 +76,7 @@ namespace PLM.Controllers
         private bool IsGameDone()
         {
             currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
-            if (((UserGameSession)Session["userGameSession"]).currentGuess >= (currentModule.Answers.Count - 1))
+            if (((UserGameSession)Session["userGameSession"]).currentGuess >= (((UserGameSession)Session["userGameSession"]).Pictures.Count))
             {
                 return true;
             }
@@ -86,17 +87,86 @@ namespace PLM.Controllers
         private void GenerateModule(int PLMid)
         {
             currentModule = db.Modules.Find(PLMid);
-            currentModule.Answers.Shuffle();
+            // Turned shuffled off so that elementAt() works correctly
+            // Shuffled the list of pictures instead so random generation
+            // still works
+            //currentModule.Answers.Shuffle();
+            //foreach (Answer answer in currentModule.Answers)
+            //{
+            //    answer.Pictures.Shuffle();
+            //}
             currentGameSession = new UserGameSession();
             currentGameSession.Score = 0;
             // set to -1 because GenerateGuess() will increment it to 0 the first time it runs
             currentGameSession.currentGuess = -1;
             currentGameSession.currentModule = currentModule;
-
+            foreach (Answer answer in currentModule.Answers)
+            {
+                foreach (Picture picture in answer.Pictures)
+                {
+                    currentGameSession.Pictures.Add(picture);
+                }
+            }
+            // shuffle pictures list so random pull still works
+            currentGameSession.Pictures.Shuffle();
             Session["userGameSession"] = currentGameSession;
         }
 
-        private void GenerateGuess()
+        // Generates Guess, loops through each picture in each answer
+        // the same answer will be chosen multiple times with different pictures
+        private void GenerateGuessONEperPIC()
+        {
+            currentGuessNum = ((UserGameSession)Session["userGameSession"]).currentGuess++;
+            currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
+            pictureID = GetPictureID(currentGuessNum);
+            answerID = GetAnswerID();
+
+            currentGuess.Answer = currentModule.Answers.ElementAt(answerID).AnswerString;
+            currentGuess.ImageURL = currentModule.Answers.ElementAt(answerID).Pictures.ElementAt(pictureID).Location;
+            currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);
+
+            GeneratedGuessIDs.Add(answerID);
+            GenerateWrongAnswers();
+
+            currentGuess.possibleAnswers.Shuffle();
+        }
+
+        private int GetPictureID(int currentGuessNum)
+        {
+            Picture currentPicture = ((UserGameSession)Session["userGameSession"]).Pictures.ElementAt(currentGuessNum);
+
+            foreach (Answer answer in currentModule.Answers)
+            {
+                foreach (Picture picture in answer.Pictures)
+                {
+                    if ((picture.PictureID == currentPicture.PictureID) && (answer.AnswerID == currentPicture.Answer.AnswerID))
+                    {
+                        return picture.PictureID;
+                    }
+                }
+            }
+            return 1;
+        }
+
+        private int GetAnswerID()
+        {
+            foreach (Answer answer in currentModule.Answers)
+            {
+                foreach (Picture picture in answer.Pictures)
+                {
+                    if (picture.PictureID == pictureID)
+                    {
+                        return answer.AnswerID;
+                    }
+                }
+            }
+            // Defaults to 1 so error doesn't occur
+            return 1;
+        }
+
+        // Generates guess, only loops through each answer once, so only
+        // one picture will be chosen per answer
+        private void GenerateGuessONEperANS()
         {
             ((UserGameSession)Session["userGameSession"]).currentGuess++;
             currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
