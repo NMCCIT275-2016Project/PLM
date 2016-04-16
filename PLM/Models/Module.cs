@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PLM
 {
@@ -12,7 +14,11 @@ namespace PLM
         public string Name { get; set; }
         public string Topic { get; set; }
 
+        public virtual int CategoryId { get; set; }
+
         public virtual List<Answer> Answers { get; set; }
-        public virtual User User { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
     }
 }

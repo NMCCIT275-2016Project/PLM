@@ -12,7 +12,7 @@ namespace PLM.Controllers
 {
     public class ModulesEDITController : Controller
     {
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /ModulesEDIT/
         public ActionResult Index()

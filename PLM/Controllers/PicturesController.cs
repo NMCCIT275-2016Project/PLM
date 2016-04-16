@@ -12,7 +12,7 @@ namespace PLM.Controllers
 {
     public class PicturesController : Controller
     {
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /Pictures/
         public ActionResult Index()

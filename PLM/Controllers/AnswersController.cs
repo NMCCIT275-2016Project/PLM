@@ -12,7 +12,7 @@ namespace PLM.Controllers
 {
     public class AnswersController : Controller
     {
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /Answers/
         public ActionResult Index()

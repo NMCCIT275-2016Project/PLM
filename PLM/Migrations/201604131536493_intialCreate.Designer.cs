@@ -7,13 +7,13 @@ namespace PLM.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddUser : IMigrationMetadata
+    public sealed partial class intialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(intialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603081515489_AddUser"; }
+            get { return "201604131536493_intialCreate"; }
         }
         
         string IMigrationMetadata.Source

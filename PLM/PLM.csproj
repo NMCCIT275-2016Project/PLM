@@ -172,18 +172,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603072114548_Initial.cs" />
-    <Compile Include="Migrations\201603072114548_Initial.Designer.cs">
-      <DependentUpon>201603072114548_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603081515489_AddUser.cs" />
-    <Compile Include="Migrations\201603081515489_AddUser.Designer.cs">
-      <DependentUpon>201603081515489_AddUser.cs</DependentUpon>
+    <Compile Include="Migrations\201604131536493_intialCreate.cs" />
+    <Compile Include="Migrations\201604131536493_intialCreate.Designer.cs">
+      <DependentUpon>201604131536493_intialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Picture.cs" />
@@ -371,6 +368,7 @@
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Properties\PublishProfiles\PerceptualLearning.pubxml" />
     <None Include="Properties\PublishProfiles\PLMGamesite2 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PLMGamesite2 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -472,11 +470,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603072114548_Initial.resx">
-      <DependentUpon>201603072114548_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603081515489_AddUser.resx">
-      <DependentUpon>201603081515489_AddUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604131536493_intialCreate.resx">
+      <DependentUpon>201604131536493_intialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

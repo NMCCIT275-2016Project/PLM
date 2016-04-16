@@ -8,7 +8,7 @@ namespace PLM.Controllers
 {
     public class ProfileController : Controller
     {
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Profile
         public ActionResult Index()
         {

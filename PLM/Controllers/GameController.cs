@@ -8,7 +8,7 @@ namespace PLM.Controllers
 {
     public class GameController : Controller
     {
-        private PLMContext db = new PLMContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         private Module currentModule = new Module();
         private PlayViewModel currentGuess = new PlayViewModel();
         private bool PLMgenerated = false;

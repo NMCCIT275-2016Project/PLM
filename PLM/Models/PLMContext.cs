@@ -6,19 +6,17 @@ using System.Data.Entity;
 
 namespace PLM
 {
-    public class PLMContext : DbContext
-    {
-        // if we add "string connString" in PLMContext() as a parameter and
+    //public class ApplicationDbContext : DbContext
+  //  {
+        // if we add "string connString" in ApplicationDbContext() as a parameter and
         // reference it in base() we can specify which database we want to use
         // instead of hard coding it, if we end up generating multiple ones
-        public PLMContext() : base("DefaultConnection")
-        {
+        //public ApplicationDbContext() : base("DefaultConnection")
+      //  {
 
-        }
+       // }
 
-        public DbSet<Module> Modules { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<User> Users { get; set; }
-    }
+        //public DbSet<Module> Modules { get; set; }
+
+  //  }
 }

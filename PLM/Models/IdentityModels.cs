@@ -1,13 +1,16 @@
 ﻿using System.Security.Claims;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
-namespace PLM.Models
+namespace PLM
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public List <Module> ModuleList { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -28,5 +31,10 @@ namespace PLM.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
