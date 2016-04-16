@@ -1,6 +1,6 @@
 //Sounds from http://www.freesfx.co.uk/
 var pictureAnswer = "default";
-var count = 0;
+var count = Number(document.getElementById("displayScore").innerText);
 
 //These cookie functions are from w3schools
 function setCookie(cname, cvalue, exdays) {
@@ -26,7 +26,7 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioCorrect").play();
         }
-        document.getElementById("resultText").innerText = ("Indubitably, the correct answer is in fact " + answer);
+        $("#resultText").text() = ("Indubitably, the correct answer is in fact " + answer);
         reveal();
         showNext();
         return true;
@@ -35,15 +35,15 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioIncorrect").play();
         }
-        document.getElementById("resultText").innerText = ("Preposterous, the correct answer was actually " + answer);
+        $("#resultText").text() = ("Preposterous, the correct answer was actually " + answer);
         reveal();
         showNext();
         return false;
     }
 }
-
+//Still being worked on
 function ButtonClick(guess) {
-    pictureAnswer = document.getElementById("StoredAnswer").innerText;
+    pictureAnswer = $("#StoredAnswer").text();
 
     if (isGuessRight(pictureAnswer, guess)) {
         Correct();
@@ -53,25 +53,52 @@ function ButtonClick(guess) {
     }
 }
 
+//legacy function
+//function ButtonClick(guess) {
+//    pictureAnswer = document.getElementById("StoredAnswer").innerText;
+
+//    if (isGuessRight(pictureAnswer, guess)) {
+//        Correct();
+//    }
+//    else {
+
+//    }
+//}
+
 function showNext() {
     document.getElementById("nextButton").style.display = "inline";
 }
 
+//Currently working on function
 function reveal() {
-    pictureAnswer = document.getElementById("StoredAnswer").innerText;
+    pictureAnswer = $("#StoredAnswer").text();
 
     $('.btn').each(function () {
-        if (this.innerText == pictureAnswer) {
-            this.style.backgroundColor = "green";
+        if ($(this).text() === pictureAnswer) {
+            $(this).css({"background-color": "green"});
         } else {
-            this.style.backgroundColor = "red";
+            $(this).css({ "background-color": "red" });
         }
     });
 }
 
+//Legacy function
+//function reveal() {
+//    pictureAnswer = document.getElementById("StoredAnswer").innerText;
+
+//    $('.btn').each(function () {
+//        if (this.innerText == pictureAnswer) {
+//            this.style.backgroundColor = "green";
+//        } else {
+//            this.style.backgroundColor = "red";
+//        }
+//    });
+//}
+
 function Correct() {
-    count = (count + 100);
-    document.getElementById("score").innerText = count;
+    count = (parseInt(count) + 100);
+    document.getElementById("Score").value = count;
+    document.getElementById("displayScore").innerText = count;
 }
 
 //Toggle whether sound will play
