@@ -121,6 +121,7 @@ namespace PLM.Controllers
             pictureID = GetPictureID(currentGuessNum);
             answerID = GetAnswerID();
 
+            //getting index out of range errors here, need to look into it - Ben
             currentGuess.Answer = currentModule.Answers.ElementAt(answerID).AnswerString;
             currentGuess.ImageURL = currentModule.Answers.ElementAt(answerID).Pictures.ElementAt(pictureID).Location;
             currentGuess.possibleAnswers.Add(currentModule.Answers.ElementAt(answerID).AnswerString);

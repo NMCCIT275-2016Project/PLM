@@ -1,3 +1,14 @@
+// Hello.
+//
+// This is JSHint, a tool that helps to detect errors and potential
+// problems in your JavaScript code.
+//
+// To start, simply enter some JavaScript anywhere on this page. Your
+// report will appear on the right side.
+//
+// Additionally, you can toggle specific options in the Configure
+// menu.
+
 //Sounds from http://www.freesfx.co.uk/
 var pictureAnswer = "default";
 var count = Number(document.getElementById("displayScore").innerText);
@@ -16,7 +27,7 @@ function getCookie(cname) {
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
     }
     return "";
 }
@@ -26,7 +37,7 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioCorrect").play();
         }
-        $("#resultText").text() = ("Indubitably, the correct answer is in fact " + answer);
+        $("#resultText").text("Indubitably, the correct answer is in fact " + answer);
         reveal();
         showNext();
         return true;
@@ -35,7 +46,7 @@ function isGuessRight(answer, guess) {
         if (getCookie("muteSound") !== "true") {
             document.getElementById("audioIncorrect").play();
         }
-        $("#resultText").text() = ("Preposterous, the correct answer was actually " + answer);
+        $("#resultText").text("Preposterous, the correct answer was actually " + answer);
         reveal();
         showNext();
         return false;
@@ -75,7 +86,7 @@ function reveal() {
 
     $('.btn').each(function () {
         if ($(this).text() === pictureAnswer) {
-            $(this).css({"background-color": "green"});
+            $(this).css({ "background-color": "green" });
         } else {
             $(this).css({ "background-color": "red" });
         }
