@@ -12,7 +12,7 @@ namespace PLM
     {
         public int ModuleID { get; set; }
         public string Name { get; set; }
-        public string Topic { get; set; }
+       // public string CategoryId { get; set; }  - Shane: commented out. Switched to Category.
 
         public virtual int CategoryId { get; set; }
 
