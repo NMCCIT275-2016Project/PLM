@@ -12,7 +12,6 @@ namespace PLM
     {
         public int ModuleID { get; set; }
         public string Name { get; set; }
-        public string Topic { get; set; }
 
         public virtual int CategoryId { get; set; }
 

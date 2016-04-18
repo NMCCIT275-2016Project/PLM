@@ -176,6 +176,10 @@
     <Compile Include="Migrations\201604131536493_intialCreate.Designer.cs">
       <DependentUpon>201604131536493_intialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604181456498_UserModelUpdate.cs" />
+    <Compile Include="Migrations\201604181456498_UserModelUpdate.Designer.cs">
+      <DependentUpon>201604181456498_UserModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -482,6 +486,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604131536493_intialCreate.resx">
       <DependentUpon>201604131536493_intialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604181456498_UserModelUpdate.resx">
+      <DependentUpon>201604181456498_UserModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

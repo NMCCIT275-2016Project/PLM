@@ -21,7 +21,9 @@ namespace PLM
 
         [Display(Name = "Institution")]
         public string Institution { get; set; }
+
         public List <Module> ModuleList { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

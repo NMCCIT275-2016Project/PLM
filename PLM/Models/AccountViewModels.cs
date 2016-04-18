@@ -53,16 +53,6 @@ namespace PLM.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-        [Display(Name = "Institution")]
-        public string Institution { get; set; }
 
         [Required]
         [EmailAddress]
@@ -79,6 +69,15 @@ namespace PLM.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Institution")]
+        public string Institution { get; set; }
     }
 
     public class ResetPasswordViewModel
