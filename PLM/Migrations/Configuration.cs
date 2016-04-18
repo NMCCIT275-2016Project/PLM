@@ -21,9 +21,9 @@ namespace PLM.Migrations
             
                 //context.Modules.AddOrUpdate(
                 //  m => m.Name,
-                //  new Module { Name = "Games", Topic = "Games", ModuleID = 1 },
-                //  new Module { Name = "Food", Topic = "Food", ModuleID = 2 },
-                //  new Module { Name = "Shows", Topic = "Shows", ModuleID = 3 }
+                //  new Module { Name = "Games", CategoryId = "Games", ModuleID = 1 },
+                //  new Module { Name = "Food", CategoryId = "Food", ModuleID = 2 },
+                //  new Module { Name = "Shows", CategoryId = "Shows", ModuleID = 3 }
                 //);
         }
     }

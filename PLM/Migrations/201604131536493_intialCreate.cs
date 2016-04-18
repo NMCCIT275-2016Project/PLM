@@ -25,7 +25,7 @@ namespace PLM.Migrations
                     {
                         ModuleID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Topic = c.String(),
+                        //Topic = c.String(),
                         CategoryId = c.Int(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
