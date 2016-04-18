@@ -200,10 +200,14 @@
     <Content Include="Content\animate.min.css" />
     <Content Include="Content\Audio\correctSound.mp3" />
     <Content Include="Content\Audio\incorrectSound.mp3" />
+    <Content Include="Content\basic.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dropzone-amd-module.js" />
+    <Content Include="Content\dropzone.css" />
+    <Content Include="Content\dropzone.js" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\404-bg.png" />
     <Content Include="Content\Images\404.png" />
@@ -344,6 +348,10 @@
     <Content Include="Content\Images\services\4.png" />
     <Content Include="Content\lightbox.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\min\basic.min.css" />
+    <Content Include="Content\min\dropzone-amd-module.min.js" />
+    <Content Include="Content\min\dropzone.min.css" />
+    <Content Include="Content\min\dropzone.min.js" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\test.css" />
