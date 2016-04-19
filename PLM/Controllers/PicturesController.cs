@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PLM;
+using System.IO;
 
 namespace PLM.Controllers
 {
@@ -52,7 +53,19 @@ namespace PLM.Controllers
         {
             if (ModelState.IsValid)
             {
+                picture.Location = "empty";
                 db.Pictures.Add(picture);
+
+                var location = "";
+                if (location == "")
+                {
+                //error
+                }
+                else
+                {
+                    picture.Location = location;
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("edit", new { controller = "Answers", id = picture.AnswerID });
             }
@@ -128,5 +141,64 @@ namespace PLM.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        public ActionResult SaveUploadedFile()
+        {
+            Session["upload"] = "AmerGeoPhoto";
+
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string moduleDirectory = (Path.Combine(Server.MapPath("~/Content/Images/PLM/" + Session["upload"].ToString() + "/" )));
+                        if (!Directory.Exists(moduleDirectory)) 
+                        {
+                            Directory.CreateDirectory(moduleDirectory);
+                        }
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Images\\PLM\\", Server.MapPath(@"\")));
+
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), moduleDirectory);
+
+                        var fileName1 = Path.GetFileName(file.FileName);
+
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+
+                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+
+
+                        file.SaveAs(path);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+
+
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = fName });
+            }
+            else
+            {
+                return Json(new { Message = "Error in saving file" });
+            }
+        }
+
     }
 }

@@ -4,6 +4,34 @@
     ViewBag.Title = "Edit";
 }
 
+<script>
+    //File Upload response from the server
+    //Dropzone.options.dropzoneForm = {
+    //    init: function () {
+    //        this.on("complete", function (data) {
+    //            //var res = eval('(' + data.xhr.responseText + ')');
+    //            var res = JSON.parse(data.xhr.responseText);
+    //        });
+    //    }
+    //};
+
+    Dropzone.myDropzone.options = {
+        previewTemplate: document.querySelector('#template-container').innerHTML,
+        // Specifing an event as an configuration option overwrites the default
+        // `addedfile` event handler.
+        addedfile: function (file) {
+            file.previewElement = Dropzone.createElement(this.options.previewTemplate);
+            // Now attach this new element some where in your page
+        },
+        thumbnail: function (file, dataUrl) {
+            // Display the image in your file.previewElement
+        },
+        uploadprogress: function (file, progress, bytesSent) {
+            // Display the progress
+        }
+    };
+</script>
+
 <h2>Edit</h2>
 
 
@@ -63,48 +91,6 @@
         </div>
 }
 
-<form action="/file-upload" class="dropzone">
-    <div class="fallback">
-        <input name="file" type="file" multiple />
-    </div>
-</form>
-
-<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
-<div class="table table-striped" class="files" id="previews">
-
-    <div id="template" class="file-row">
-        <!-- This is used as the file preview template -->
-        <div>
-            <span class="preview"><img data-dz-thumbnail /></span>
-        </div>
-        <div>
-            <p class="name" data-dz-name></p>
-            <strong class="error text-danger" data-dz-errormessage></strong>
-        </div>
-        <div>
-            <p class="size" data-dz-size></p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-            </div>
-        </div>
-        <div>
-            <button class="btn btn-primary start">
-                <i class="glyphicon glyphicon-upload"></i>
-                <span>Start</span>
-            </button>
-            <button data-dz-remove class="btn btn-warning cancel">
-                <i class="glyphicon glyphicon-ban-circle"></i>
-                <span>Cancel</span>
-            </button>
-            <button data-dz-remove class="btn btn-danger delete">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span>Delete</span>
-            </button>
-        </div>
-    </div>
-
-</div>
-
 
 <div>
     @Html.ActionLink("Back to List", "edit", new { controller = "ModulesEdit", id = Model.ModuleID })
@@ -114,6 +100,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<script src="~/Content/min/basic.min.css"></script>
 <script src="~/Content/dropzone.js"></script>
 <script src="~/Content/dropzone-amd-module.js"></script>
 <script src="~/Content/min/dropzone-amd-module.min.js"></script>

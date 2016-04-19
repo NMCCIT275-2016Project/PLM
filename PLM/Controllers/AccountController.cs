@@ -481,6 +481,10 @@ namespace PLM.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            //var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            //identity.AddClaim(new Claim("FirstName", user.FirstName));
+            //identity.AddClaim(new Claim("LastName", user.LastName));
+            //identity.AddClaim(new Claim("Institution", user.Institution));
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
         }
 
