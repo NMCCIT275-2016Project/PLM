@@ -33,3 +33,13 @@ article{
     overflow: scroll;
     scrollbar-face-color:#00aeef;
 }
+
+.gameButton{
+    margin: 1.5%;
+    width: 30%;
+    overflow: hidden;
+}
+
+#answerButtons{
+    padding-bottom:10px;
+}
