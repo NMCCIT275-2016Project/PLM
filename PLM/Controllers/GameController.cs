@@ -22,7 +22,6 @@ namespace PLM.Controllers
 
         private int answerID;
         private int pictureID;
-        private int wrongAnswerID;
         private int NumAnswersDifficultyBased = 5;
 
         //Module currentModule;
@@ -33,9 +32,9 @@ namespace PLM.Controllers
             return View();
         }
 
-        public ActionResult Complete()
+        public ActionResult Complete(int? score)
         {
-            return View();
+            return View(score);
         }
 
         public ActionResult Play(int? PLMid)
@@ -61,7 +60,7 @@ namespace PLM.Controllers
             ((UserGameSession)Session["userGameSession"]).Score = Score;
             if (IsGameDone())
             {
-                return RedirectToAction("Complete");
+                return RedirectToAction("Complete", new { Score = Score });
             }
             GenerateGuessONEperPIC();
             currentGuess.Score = Score;
@@ -76,7 +75,8 @@ namespace PLM.Controllers
         private bool IsGameDone()
         {
             currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
-            if (((UserGameSession)Session["userGameSession"]).currentGuess >= (((UserGameSession)Session["userGameSession"]).Pictures.Count))
+            if (((UserGameSession)Session["userGameSession"]).currentGuess >= 5)
+            //if (((UserGameSession)Session["userGameSession"]).currentGuess >= (((UserGameSession)Session["userGameSession"]).PictureIndicies.Count))
             {
                 return true;
             }
@@ -86,37 +86,28 @@ namespace PLM.Controllers
 
         private void GenerateModule(int PLMid)
         {
-            currentModule = db.Modules.Find(PLMid);
-            // Turned shuffled off so that elementAt() works correctly
-            // Shuffled the list of pictures instead so random generation
-            // still works
-            //currentModule.Answers.Shuffle();
-            //foreach (Answer answer in currentModule.Answers)
-            //{
-            //    answer.Pictures.Shuffle();
-            //}
             currentGameSession = new UserGameSession();
+            currentGameSession.currentModule = db.Modules.Find(PLMid);
             currentGameSession.Score = 0;
+
             // set to -1 because GenerateGuess() will increment it to 0 the first time it runs
             currentGameSession.currentGuess = -1;
             int answerIndex = -1;
             int pictureIndex;
-            foreach (Answer answer in currentModule.Answers)
+            foreach (Answer answer in currentGameSession.currentModule.Answers)
             {
                 answerIndex++;
-                answer.AnswerID = answerIndex;
                 pictureIndex = -1;
+
                 foreach (Picture picture in answer.Pictures)
                 {
                     pictureIndex++;
-                    picture.PictureID = pictureIndex;
-                    picture.AnswerID = answerIndex;
-                    currentGameSession.Pictures.Add(picture);
+                    //currentGameSession.Pictures.Add(picture);
+                    currentGameSession.PictureIndicies.Add(new AnsPicIndex(answerIndex, pictureIndex, picture));
                 }
             }
-            currentGameSession.currentModule = currentModule;
-            // shuffle pictures list so random pull still works
-            currentGameSession.Pictures.Shuffle();
+            // Shuffle the list of pictures so Users itterate through them randomly
+            currentGameSession.PictureIndicies.Shuffle();
             Session["userGameSession"] = currentGameSession;
         }
 
@@ -124,15 +115,15 @@ namespace PLM.Controllers
         // the same answer will be chosen multiple times with different pictures
         private void GenerateGuessONEperPIC()
         {
-            int pictureIndex;
-            int answerIndex;
             currentGuessNum = (((UserGameSession)Session["userGameSession"]).currentGuess++);
             currentModule = ((UserGameSession)Session["userGameSession"]).currentModule;
-            int[] placeholder; 
-            placeholder = GetPictureID(currentGuessNum);
-            pictureID = placeholder[0];
-            pictureIndex = placeholder[1];
-            answerIndex = placeholder[2];
+            int[] indicies = GetPictureID(currentGuessNum);
+            int answerIndex = indicies[0];
+            int pictureIndex = indicies[1];
+            //pictureID = indicies[0];
+            //pictureIndex = indicies[1];
+            //answerIndex = indicies[2];
+
 
             //getting index out of range errors here, need to look into it - Ben
             currentGuess.Answer = currentModule.Answers.ElementAt(answerIndex).AnswerString;
@@ -147,24 +138,26 @@ namespace PLM.Controllers
 
         private int[] GetPictureID(int currentGuessNum)
         {
-            Picture currentPicture = ((UserGameSession)Session["userGameSession"]).Pictures.ElementAt(currentGuessNum);
-            int AnswerTrackerIndex = -1;
-            int PictureTrackerIndex;
+            AnsPicIndex IndexItem = ((UserGameSession)Session["userGameSession"]).PictureIndicies.ElementAt(currentGuessNum);
+            return new int[] { IndexItem.AnswerIndex, IndexItem.PictureIndex };
+            //Picture currentPicture = ((UserGameSession)Session["userGameSession"]).Pictures.ElementAt(currentGuessNum);
+            //int AnswerTrackerIndex = -1;
+            //int PictureTrackerIndex;
 
-            foreach (Answer answer in currentModule.Answers)
-            {
-                AnswerTrackerIndex++;
-                PictureTrackerIndex = -1;
-                foreach (Picture picture in answer.Pictures)
-                {
-                    PictureTrackerIndex++;
-                    if ((picture.PictureID == currentPicture.PictureID))
-                    {
-                        return new int[] {picture.PictureID, PictureTrackerIndex, AnswerTrackerIndex};
-                    }
-                }
-            }
-            return new int[] {1, 1, 1};
+            //foreach (Answer answer in currentModule.Answers)
+            //{
+            //    AnswerTrackerIndex++;
+            //    PictureTrackerIndex = -1;
+            //    foreach (Picture picture in answer.Pictures)
+            //    {
+            //        PictureTrackerIndex++;
+            //        if ((picture.PictureID == currentPicture.PictureID))
+            //        {
+            //            return new int[] { picture.PictureID, PictureTrackerIndex, AnswerTrackerIndex };
+            //        }
+            //    }
+            //}
+            //return new int[] { 1, 1, 1 };
         }
 
         //private int GetAnswerID()
@@ -209,6 +202,7 @@ namespace PLM.Controllers
 
         private void GenerateWrongAnswers()
         {
+            int wrongAnswerID;
             //while we still have work to do
             while (WrongAnswersGenerationNOTcompleted)
             {

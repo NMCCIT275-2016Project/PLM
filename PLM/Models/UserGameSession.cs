@@ -11,10 +11,12 @@ namespace PLM
         public int currentGuess;
         public Module currentModule;
         public List<Picture> Pictures;
+        public List<AnsPicIndex> PictureIndicies;
 
         public UserGameSession()
         {
             Pictures = new List<Picture>();
+            PictureIndicies = new List<AnsPicIndex>();
         }
     }
 }
