@@ -67,16 +67,13 @@ ViewBag.Title = "Your Profile";
 
 <article>
     <h3>Name:</h3>
-    <p>text</p>
-
-    <h3>Username:</h3>
-    <p>text</p>
+    <p>Shane Workman</p>
 
     <h3>Email:</h3>
-    <p>Text</p>
+    <p>Trackstarshane24@yahoo.com</p>
 
     <h3>Institution:</h3>
-    <p>Text</p>
+    <p>Northwestern Michigan College</p>
 
     <br/><br/>
 </article>
@@ -112,7 +109,7 @@ ViewBag.Title = "Your Profile";
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { controller = "ModulesEDIT", id = item.ModuleID }) |
-                    @Html.ActionLink("Details", "Details", new { controller = "ModulesEDIT", id = item.ModuleID }) |
+                    @*@Html.ActionLink("Details", "Details", new { controller = "ModulesEDIT", id = item.ModuleID }) |*@
                     @Html.ActionLink("Delete", "Delete", new { controller = "ModulesEDIT", id = item.ModuleID })
                 </td>
             </tr>

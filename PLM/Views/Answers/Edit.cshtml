@@ -12,11 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <div style="text-align:right; float:right">
+            <a href="http://plmeditor.azurewebsites.net" target="_blank">Edit an image to upload.</a>
+        </div>
         <h4>Answer</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.AnswerID)
-
         <div class="form-group">
             @Html.LabelFor(model => model.AnswerString, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -36,7 +38,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Pictures, "Pictures", new { @class = "control-label col-md-2" })
             <p>
-                <a href="http://plmimageeditor.azurewebsites.net?folderPath=AmerGeoPhoto&fileName=test.png">Add Image</a>
                 @*@{
                     Picture test = new Picture()
                     {
@@ -107,6 +108,9 @@
 
 
 <div>
+    <div style="text-align:right; float:right">
+        <a href="http://plmeditor.azurewebsites.net" target="_blank">Edit an image to upload.</a>
+    </div>
     @Html.ActionLink("Back to List", "edit", new { controller = "ModulesEdit", id = Model.ModuleID })
 </div>
 
