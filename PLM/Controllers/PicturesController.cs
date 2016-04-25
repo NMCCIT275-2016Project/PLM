@@ -49,17 +49,23 @@ namespace PLM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PictureID,Location,AnswerID")] Picture picture)
+        public ActionResult Create([Bind(Include = "PictureID,Location,AnswerID")] Picture picture)
         {
             if (ModelState.IsValid)
             {
-                picture.Location = "empty";
+                var ans = db.Answers
+                    .Where(a => a.AnswerID == picture.AnswerID)
+                    .ToList().First();
+
+                picture.Answer = ans;
+
+                picture.Location = "";
                 db.Pictures.Add(picture);
 
-                var location = "";
+                var location = SaveUploadedFile(picture);
                 if (location == "")
                 {
-                //error
+                    //error
                 }
                 else
                 {
@@ -141,13 +147,13 @@ namespace PLM.Controllers
             }
             base.Dispose(disposing);
         }
-        
-        public ActionResult SaveUploadedFile()
-        {
-            Session["upload"] = "AmerGeoPhoto";
 
+        public string SaveUploadedFile(Picture picture)
+        {
+            Session["upload"] = picture.Answer.Module.Name;
             bool isSavedSuccessfully = true;
             string fName = "";
+            var path = "";
             try
             {
                 foreach (string fileName in Request.Files)
@@ -174,7 +180,7 @@ namespace PLM.Controllers
                             System.IO.Directory.CreateDirectory(pathString);
 
 
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        path = string.Format("{0}\\{1}", pathString, file.FileName);
 
 
                         file.SaveAs(path);
@@ -192,13 +198,20 @@ namespace PLM.Controllers
 
             if (isSavedSuccessfully)
             {
-                return Json(new { Message = fName });
+                return path;
             }
             else
             {
-                return Json(new { Message = "Error in saving file" });
+                return "";
             }
         }
+
+        public ActionResult DropzoneTest()
+        {
+            return View();
+        }
+
+
 
     }
 }

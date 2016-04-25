@@ -477,6 +477,7 @@
     <Content Include="Views\ModulesEDIT\Edit.cshtml" />
     <Content Include="Views\ModulesEDIT\Index.cshtml" />
     <Content Include="Views\Game\Complete.cshtml" />
+    <Content Include="Views\Pictures\DropzoneTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,14 +78,7 @@
             </div>
         </div>
 
-        <div class="jumbotron">
-            <form action="~/Pictures/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
-                <div class="fallback">
-                    <input name="file" type="file" multiple />
-                    <input type="submit" value="Upload" />
-                </div>
-            </form>
-        </div>
+
 
         @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -95,7 +88,15 @@
     </div>
 }
 
-
+<div class="jumbotron">
+    <form action="~/Pictures/Create" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+        @Html.AntiForgeryToken()
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
 
 
 <div>

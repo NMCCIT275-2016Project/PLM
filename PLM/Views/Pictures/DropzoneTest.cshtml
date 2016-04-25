@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "DropzoneTest";
+}
+
+<h2>DropzoneTest</h2>
+
+<br/><br /><br /><br />
+
+<div class="jumbotron">
+    <form action="~/Pictures/UploadFiles" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
