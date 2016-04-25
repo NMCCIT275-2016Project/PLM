@@ -34,11 +34,12 @@ article{
     scrollbar-face-color:#00aeef;
 }
 
-/*#dropZone {
-        background: gray;
-        border: black dashed 3px;
-        width: 200px;
-        padding: 50px;
-        text-align: center;
-        color: white;
-    }*/
+.gameButton{
+    margin: 1.5%;
+    width: 30%;
+    overflow: hidden;
+}
+
+#answerButtons{
+    padding-bottom:10px;
+}
