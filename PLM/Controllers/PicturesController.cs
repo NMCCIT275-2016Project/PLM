@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PLM;
+using System.IO;
 
 namespace PLM.Controllers
 {
@@ -48,11 +49,29 @@ namespace PLM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PictureID,Location,AnswerID")] Picture picture)
+        public ActionResult Create([Bind(Include = "PictureID,Location,AnswerID")] Picture picture)
         {
             if (ModelState.IsValid)
             {
+                var ans = db.Answers
+                    .Where(a => a.AnswerID == picture.AnswerID)
+                    .ToList().First();
+
+                picture.Answer = ans;
+
+                picture.Location = "";
                 db.Pictures.Add(picture);
+
+                var location = SaveUploadedFile(picture);
+                if (location == "")
+                {
+                    //error
+                }
+                else
+                {
+                    picture.Location = location;
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("edit", new { controller = "Answers", id = picture.AnswerID });
             }
@@ -128,5 +147,71 @@ namespace PLM.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public string SaveUploadedFile(Picture picture)
+        {
+            Session["upload"] = picture.Answer.Module.Name;
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            var path = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string moduleDirectory = (Path.Combine(Server.MapPath("~/Content/Images/PLM/" + Session["upload"].ToString() + "/" )));
+                        if (!Directory.Exists(moduleDirectory)) 
+                        {
+                            Directory.CreateDirectory(moduleDirectory);
+                        }
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Images\\PLM\\", Server.MapPath(@"\")));
+
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), moduleDirectory);
+
+                        var fileName1 = Path.GetFileName(file.FileName);
+
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+
+                        path = string.Format("{0}\\{1}", pathString, file.FileName);
+
+
+                        file.SaveAs(path);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+
+
+            if (isSavedSuccessfully)
+            {
+                return path;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public ActionResult DropzoneTest()
+        {
+            return View();
+        }
+
+
+
     }
 }
